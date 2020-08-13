@@ -41,7 +41,7 @@ if (tasks.length > TASK_COUNT_PER_STEP) {
 
   const loadMoreButton = boardElement.querySelector(`.load-more`);
 
-  loadMoreButton.addEventListener(`click`, (evt) => {
+  const onLoadMore = (evt) => {
     evt.preventDefault();
     tasks
       .slice(renderedTaskCount, renderedTaskCount + TASK_COUNT_PER_STEP)
@@ -52,5 +52,7 @@ if (tasks.length > TASK_COUNT_PER_STEP) {
     if (renderedTaskCount >= tasks.length) {
       loadMoreButton.remove();
     }
-  });
+  };
+
+  loadMoreButton.addEventListener(`click`, onLoadMore);
 }
