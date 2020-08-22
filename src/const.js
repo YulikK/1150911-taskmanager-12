@@ -1,5 +1,5 @@
 export const COLORS = [`black`, `yellow`, `blue`, `green`, `pink`];
-export const AX_DAYS_GAP = 7;
+export const MAX_DAYS_GAP = 7;
 export const BLANK_TASK = {
   color: COLORS[0],
   description: ``,
