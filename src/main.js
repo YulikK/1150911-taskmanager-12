@@ -83,7 +83,7 @@ const renderBoard = (boardContainer, boardTasks) => {
     const loadMoreButtonComponent = new LoadMoreButtonView();
     render(boardComponent.getElement(), loadMoreButtonComponent.getElement(), RenderPosition.BEFOREEND);
 
-    loadMoreButtonComponent.getElement().addEventListener(`click`, (evt) => {
+    const onLoadMore = (evt) => {
       evt.preventDefault();
       boardTasks
         .slice(renderedTaskCount, renderedTaskCount + TASK_COUNT_PER_STEP)
@@ -94,7 +94,9 @@ const renderBoard = (boardContainer, boardTasks) => {
         loadMoreButtonComponent.getElement().remove();
         loadMoreButtonComponent.removeElement();
       }
-    });
+    };
+
+    loadMoreButtonComponent.getElement().addEventListener(`click`, onLoadMore);
   }
 };
 
