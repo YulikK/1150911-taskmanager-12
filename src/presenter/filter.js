@@ -1,6 +1,7 @@
 import FilterView from "../view/filter.js";
 import {render, RenderPosition, replace, remove} from "../utils/render.js";
 import {filter} from "../utils/filter.js";
+import {ucFirst} from "../utils/common.js";
 import {FilterType, UpdateType} from "../const.js";
 
 export default class Filter {
@@ -52,37 +53,12 @@ export default class Filter {
   _getFilters() {
     const tasks = this._tasksModel.getTasks();
 
-    return [
-      {
-        type: FilterType.ALL,
-        name: `All`,
-        count: filter[FilterType.ALL](tasks).length
-      },
-      {
-        type: FilterType.OVERDUE,
-        name: `Overdue`,
-        count: filter[FilterType.OVERDUE](tasks).length
-      },
-      {
-        type: FilterType.TODAY,
-        name: `Today`,
-        count: filter[FilterType.TODAY](tasks).length
-      },
-      {
-        type: FilterType.FAVORITES,
-        name: `Favorites`,
-        count: filter[FilterType.FAVORITES](tasks).length
-      },
-      {
-        type: FilterType.REPEATING,
-        name: `Repeating`,
-        count: filter[FilterType.REPEATING](tasks).length
-      },
-      {
-        type: FilterType.ARCHIVE,
-        name: `Archive`,
-        count: filter[FilterType.ARCHIVE](tasks).length
-      }
-    ];
+    return Object.keys(FilterType).map((filterType) => {
+      return {
+        type: FilterType[filterType],
+        name: ucFirst(FilterType[filterType]),
+        count: filter[FilterType[filterType]](tasks).length
+      };
+    });
   }
 }
